@@ -132,7 +132,7 @@ app.defineView('main', {
 
 ## Using Knectron API
 
-To use **Sparc** with a remote source you can use **Knectron**.
+To use **Sparc** with a remote source you can use [Knectron](https://github.com/blujedis/knectron).
 
 ### Install
 
@@ -143,7 +143,14 @@ $ npm install knectron
 Knectron will provide the **APP_URL** for you in an environment variable <code>process.env.APP_URL</code> to make connecting easy. Define your app as show above but for your main view specify this url in options:
 
 ```ts
-app.defineView('main', { path: process.env.APP_URL })
+const app = Sparc();
+
+app.defineView('main', { path: process.env.APP_URL });
+
+app
+  .handleQuit()
+  .handleActivate()
+  .ready();
 ```
 
 ### API
@@ -161,14 +168,14 @@ knectron({
 
 That's it, not much to it! No let's change our main view in our Electron app to point to the correct url that we want **Knectron** to connect to.
 
-### Running Sparc App with Knectron
+### Run Server & App Using Knectron
 
 Configure the following in **package.json** under the **scripts** section. Be sure you have installed <code>$ npm install concurrently</code>.
 
 ```json
 {
   "scripts": {
-    "dev": "concurrently \"react-scripts start\" \"node ./path/to/connect.js\"" 
+    "dev": "concurrently \"node ./path/to/sever.js\" \"node ./path/to/connect.js\"" 
   }
 }
 ```

@@ -1,13 +1,13 @@
 {
   "name": "sparc",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "./dist",
   "scripts": {
-    "start": "yarn watch",
+    "start": "npm run watch",
     "watch": "tsc -w",
     "build": "rimraf ./dist clean && tsc",
     "test": "NODE_ENV=test mocha test/**/*.spec.ts* --require ./register.js --bail",
-    "test:clean": "NODE_ENV=test yarn build && mocha test/**/*.spec.ts* --require ./register.js --bail",
+    "test:clean": "NODE_ENV=test npm run build && mocha test/**/*.spec.ts* --require ./register.js --bail",
     "electron": "electron ./test/main"
   },
   "dependencies": {
@@ -38,6 +38,6 @@
     "Knectron",
     "Bootstrap"
   ],
-  "license": "MIT",
+  "license": "ISC",
   "author": "Blujedis <blujedicorp@gmail.com>"
 }
