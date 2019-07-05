@@ -1,4 +1,14 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Sparc, Knectron, Electron Example
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). The **package.json** scripts have been modified to allow for **Webpack** configuration without the need to eject the app.
+
+Simply install then run:
+
+```sh
+npm start
+```
+
+Both CRA and Electron will start and the Electron app will display the default CRA App.js page.
 
 ## Available Scripts
 

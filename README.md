@@ -36,6 +36,8 @@ app
   .ready();
 ```
 
+**NOTE** "main" is required by **Sparc**. You can change the name of your main view in <code>options.mainView</code>
+
 ## Sparc Options 
 
 ```ts
@@ -57,7 +59,11 @@ be used.
 
 ## Create React App Example
 
-In order to use Electron with Create React App there are several steps that need to be taken. Although not difficult, there are several. You can take a look at the working Create React App [example](example/cra) if you get stuck but here are the steps:
+In order to use Electron with Create React App there are several steps that need to be taken. Although not difficult, there are several. 
+
+### Working Create React App [example here](example/cra)
+
+If familiar you can jump right in to the example and work from there however for posterity sake the steps are below.
 
 ### Install Dependencies
 
@@ -72,8 +78,6 @@ npm install concurrently knectron customize-cra react-app-rewired -s
 Now that we have react-app-rewired installed we need to change the start/build scripts that ship with Create React App.
 
 For our **start** script we add an environment variable <code>Browser=none</code> to let CRA know not to launch the browser as it will not be needed. 
-
-For windows users you will need to prefix the env variable as <code>set Browser=none</code>.
 
 Change this:
 
@@ -91,6 +95,16 @@ To this: (where "./app" is path to your Electron app)
 "build": "react-app-rewired build",
 "test": "react-app-rewired test",
 "eject": "react-app-rewired eject",
+```
+
+### Windows Users
+
+The above start script will not work as the environment variable cannot be set in that manner instead use the following:
+
+**NOTE** the missing space between **none** and **concurrently** shown below is correct.
+
+```json
+"start": "set BROWSER=none&&concurrently \"react-app-rewired start\" \"knectron ./app\" --kill-others",
 ```
 
 ### Configure Overrides
@@ -117,9 +131,11 @@ module.exports = override(
 );
 ```
 
-### Configure Sparc Main View
+### Configure Sparc Main
 
-We need to tell our main window/view to use the Create React App url that React is listening on. Knectron does this by providing an environment variable or you can just manually set it. We also need to ensure that **nodeIntegration** is set to true.
+We need to tell our **main window/view** to use the Create React App url that React is listening on. Knectron does this by providing an environment variable or you can just manually set it. We also need to ensure that **nodeIntegration** is set to true.
+
+**NOTE** "main" is required by **Sparc**. You can change the name of your main view in <code>options.mainView</code>
 
 ```js
 app.defineView('main', { 
@@ -130,58 +146,8 @@ app.defineView('main', {
 });
 ```
 
-## Using Knectron API
+## More on Knectron
 
-To use **Sparc** with a remote source you can use [Knectron](https://github.com/blujedis/knectron).
+[Knectron](https://github.com/blujedis/knectron) can be use to spin up any **Electron** app. **Sparc** is NOT requied. 
 
-### Install
-
-```sh
-$ npm install knectron
-```
-
-Knectron will provide the **APP_URL** for you in an environment variable <code>process.env.APP_URL</code> to make connecting easy. Define your app as show above but for your main view specify this url in options:
-
-```ts
-const app = Sparc();
-
-app.defineView('main', { path: process.env.APP_URL });
-
-app
-  .handleQuit()
-  .handleActivate()
-  .ready();
-```
-
-### API
-
-Create a file called <code>connect.js</code> or whatever you wish. This is where we'll configure Knectron.
-
-```ts
-const knectron = require('knectron');
-knectron({
-  host: '127.0.0.1'                       // (default: 127.0.0.1)
-  port: 3000,                             // (default: 3000)
-  args: ['./path/to/electron/main.js']    // all args passed to Electron
-});
-```
-
-That's it, not much to it! No let's change our main view in our Electron app to point to the correct url that we want **Knectron** to connect to.
-
-### Run Server & App Using Knectron
-
-Configure the following in **package.json** under the **scripts** section. Be sure you have installed <code>$ npm install concurrently</code>.
-
-```json
-{
-  "scripts": {
-    "dev": "concurrently \"node ./path/to/sever.js\" \"node ./path/to/connect.js\"" 
-  }
-}
-```
-
-To run the above simple run the following from your terminal:
-
-```sh
-$ npm run dev
-```
+Find out more [here](https://github.com/blujedis/knectron).
