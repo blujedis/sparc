@@ -1,6 +1,6 @@
 {
   "name": "sparc",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "main": "./dist",
   "scripts": {
     "start": "npm run watch",
@@ -37,8 +37,13 @@
     "Create React App",
     "React",
     "Knectron",
-    "Bootstrap"
+    "Bootstrap",
+    "Sparc"
   ],
   "license": "ISC",
-  "author": "Blujedis <blujedicorp@gmail.com>"
+  "author": "Blujedis <blujedicorp@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blujedis/sparc.git"
+  }
 }
