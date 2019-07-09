@@ -14,7 +14,7 @@
   },
   "homepage": "./",
   "scripts": {
-    "start": "BROWSER=none concurrently \"react-app-rewired start\" \"knectron ./app\"",
+    "start": "BROWSER=none concurrently \"react-app-rewired start\" \"sleep 5\" \"knectron ./app\"",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
