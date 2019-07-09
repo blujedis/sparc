@@ -14,8 +14,10 @@ class View extends electron_1.BrowserWindow {
         this.app = app;
         this.isMain = false;
         this.options = { ...DEFAULTS, ...options };
-        this.options.path = this.app.utils.toViewPath(options.path);
         this.isMain = options.name === this.app.options.mainView;
+        if (this.isMain)
+            this.options.defer = false;
+        this.options.path = this.app.utils.toViewPath(options.path);
         const title = (this.getTitle() || '').toLowerCase();
         if ((!title || title === 'electron') && options.name)
             this.setTitle(options.name.charAt(0).toUpperCase() + options.name.slice(1));
