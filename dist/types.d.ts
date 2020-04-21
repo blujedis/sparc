@@ -38,11 +38,11 @@ export interface IQuitCommands {
     other?: string;
 }
 export interface IMainState {
-    isMaximized: boolean;
-    x: number;
-    y: number;
-    height: number;
-    width: number;
+    isMaximized?: boolean;
+    x?: number;
+    y?: number;
+    height?: number;
+    width?: number;
 }
 export interface IStoreState {
     main: IMainState;

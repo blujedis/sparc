@@ -219,6 +219,8 @@ function Sparc(options) {
         if (!app.isReady)
             return null;
         let viewState = app.store.getAs('main');
+        if (!viewState)
+            return null;
         viewState.isMaximized = view.isMaximized();
         if (!viewState.isMaximized)
             viewState = { ...viewState, ...view.getBounds() };

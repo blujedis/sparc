@@ -319,6 +319,9 @@ function Sparc(options?: IAppOptions): IApp {
 
     let viewState = app.store.getAs<IMainState>('main');
 
+    if (!viewState)
+      return null;
+
     viewState.isMaximized = view.isMaximized();
 
     if (!viewState.isMaximized)
@@ -337,7 +340,7 @@ function Sparc(options?: IAppOptions): IApp {
       const store = createStore<IStoreState>(DEFAULT_STORE_NAME);
 
       let main = { ...DEFAULT_STORE_STATE.main, width: options.width, height: options.height };
-      const defaultState = { ...DEFAULT_STORE_STATE, main };
+      const defaultState = { ...DEFAULT_STORE_STATE, main } as IMainState;
 
       // Get state or set default.
       let viewState = store.get('main', defaultState);
@@ -440,7 +443,7 @@ function Sparc(options?: IAppOptions): IApp {
 
       // User defined ready handler
       if (fn)
-        return fn(instance);
+        return fn(instance as IApp);
 
       // Must have "main" view if handling auto.
       if (!app.utils.hasOwn(app.views, app.options.mainView))

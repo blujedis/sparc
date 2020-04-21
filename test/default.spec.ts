@@ -1,12 +1,15 @@
 import * as mocha from 'mocha';
 import * as chai from 'chai';
 import { Application } from 'spectron';
+import { doesNotReject } from 'assert';
 // import 'chai-http';
 
 const expect = chai.expect;
 const should = chai.should;
 const assert = chai.assert;
 // const request = chai.request;
+
+let app: Application;
 
 describe('Sparc', () => {
 
@@ -18,21 +21,34 @@ describe('Sparc', () => {
       path,
       args: ['./test/main.js']
     });
-    return this.app.start();
-  });
-
-  it('Shows main view', function () {
-    return this.app
-      .client
-      .getWindowCount()
-      .then(count => {
-        assert.equal(count, 1);
+    return this.app.start()
+      .catch(err => {
+        console.error(err);
+        process.exit(1);
       });
   });
 
-  after(function () {
+  it('Shows main view', function () {
+    return this.app.client
+      .getWindowCount()
+      .then(count => {
+        assert.equal(count, 1);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+  after(function (done) {
     if (this.app && this.app.isRunning()) {
-      return this.app.stop();
+      this.app.stop()
+        .then(done)
+        .catch(err => {
+          done();
+        });
+    }
+    else {
+      done();
     }
   });
 

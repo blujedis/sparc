@@ -7,11 +7,11 @@ export class Store<T = any> extends ElectronStore<T> {
     super({ name, ...options });
   }
 
-  getAs<S = any>(name: string, defaultValue?: S): S {
+  getAs<S = any>(name: keyof T, defaultValue?: S): S {
     return this.get(name, defaultValue as any) as any;
   }
 
-  setAs<S = any>(key: string, value: S) {
+  setAs<S = any>(key: keyof T, value: S) {
     this.set(key, value as any);
   }
 

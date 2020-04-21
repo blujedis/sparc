@@ -92,22 +92,26 @@ export class View extends BrowserWindow {
 
         e.preventDefault();
 
-        dialog.showMessageBox(config as MessageBoxOptions, (res) => {
+        dialog.showMessageBox(null, config as MessageBoxOptions)
+          .then(res => {
 
-          if (res === 0) {
-            // set to false or will loop.
-            this.app.isConfirmExit = false;
+            if (res.checkboxChecked) {
+              // set to false or will loop.
+              this.app.isConfirmExit = false;
 
-            if (!this.app.isForcedQuit && this.app.utils.isDarwin()) {
-              this.hide();
+              if (!this.app.isForcedQuit && this.app.utils.isDarwin()) {
+                this.hide();
+              }
+              else {
+                this.close();
+              }
+
             }
-            else {
-              this.close();
-            }
 
-          }
-
-        });
+          })
+          .catch(err => {
+            console.log(err);
+          });
 
       }
 

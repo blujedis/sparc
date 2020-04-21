@@ -1,35 +1,34 @@
 {
   "name": "sparc",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "main": "./dist",
   "scripts": {
-    "start": "npm run watch",
-    "watch": "tsc -w",
+    "start": "tsc -w",
     "build": "rimraf ./dist clean && tsc",
     "test": "NODE_ENV=test mocha test/**/*.spec.ts* --require ./register.js --bail",
     "test:clean": "NODE_ENV=test npm run build && mocha test/**/*.spec.ts* --require ./register.js --bail",
     "electron": "electron ./test/main"
   },
   "dependencies": {
-    "cross-spawn": "^6.0.5",
-    "electron": "5.0.6",
-    "electron-is-dev": "^1.1.0",
-    "electron-store": "^4.0.0",
-    "serve": "^11.0.2"
+    "cross-spawn": "^7.0.2",
+    "electron": "^8.2.3",
+    "electron-is-dev": "^1.2.0",
+    "electron-store": "^5.1.1",
+    "serve": "^11.3.0"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
-    "@types/cross-spawn": "^6.0.0",
+    "@types/cross-spawn": "^6.0.1",
     "@types/mocha": "^5.2.7",
-    "@types/node": "^12.11.7",
+    "@types/node": "12.12.6",
     "chai": "^4.2.0",
-    "concurrently": "^4.1.1",
-    "mocha": "^6.1.4",
-    "rimraf": "^2.6.3",
-    "spectron": "^7.0.0",
-    "ts-node": "^8.3.0",
-    "tslint": "^5.18.0",
-    "typescript": "^3.5.2"
+    "concurrently": "^5.1.0",
+    "mocha": "^7.1.1",
+    "rimraf": "^3.0.2",
+    "spectron": "^10.0.1",
+    "ts-node": "^8.9.0",
+    "tslint": "^6.1.1",
+    "typescript": "^3.8.3"
   },
   "keywords": [
     "Electron",

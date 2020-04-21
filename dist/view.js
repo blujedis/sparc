@@ -62,8 +62,9 @@ class View extends electron_1.BrowserWindow {
         this.on('close', (e) => {
             if (config && this.app.isConfirmExit) {
                 e.preventDefault();
-                electron_1.dialog.showMessageBox(config, (res) => {
-                    if (res === 0) {
+                electron_1.dialog.showMessageBox(null, config)
+                    .then(res => {
+                    if (res.checkboxChecked) {
                         // set to false or will loop.
                         this.app.isConfirmExit = false;
                         if (!this.app.isForcedQuit && this.app.utils.isDarwin()) {
@@ -73,6 +74,9 @@ class View extends electron_1.BrowserWindow {
                             this.close();
                         }
                     }
+                })
+                    .catch(err => {
+                    console.log(err);
                 });
             }
             else {
