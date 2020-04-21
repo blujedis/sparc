@@ -1,6 +1,6 @@
 {
   "name": "sparc",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "main": "./dist",
   "scripts": {
     "start": "npm run watch",
@@ -8,8 +8,7 @@
     "build": "rimraf ./dist clean && tsc",
     "test": "NODE_ENV=test mocha test/**/*.spec.ts* --require ./register.js --bail",
     "test:clean": "NODE_ENV=test npm run build && mocha test/**/*.spec.ts* --require ./register.js --bail",
-    "electron": "electron ./test/main",
-    "prepublish": "git add . && git commit -am 'auto commit' && git push"
+    "electron": "electron ./test/main"
   },
   "dependencies": {
     "cross-spawn": "^6.0.5",
